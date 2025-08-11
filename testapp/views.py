@@ -14,7 +14,6 @@ def student_dashboard(request):
 def principal_dashboard(request):
     return HttpResponse(f"<h1> Welcome to the Principal's Dashboard, {request.user.username} !</h1> ")
 
-@login_not_required
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -27,12 +26,11 @@ def login_view(request):
             messages.error(request, 'Invalid username or password')
     return render(request, 'login.html')
 
-@login_not_required
 def register_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         first_name = request.POST.get('first_name')
-        password = request.POST.get('password')
+        password = request.POST.get('password1')
         user_type = request.POST.get('user_type')
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Username already exists')

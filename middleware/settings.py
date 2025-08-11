@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'testapp.User'
 
-LOGIN_REDIRECT_URL = '/'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +54,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Custom Middleware
+
+    'testapp.middleware.LoginRedirectMiddleware',
+    'testapp.middleware.DashboardAccessMiddleware'
 ]
+
+LOGIN_REDIRECT_URL = '/'
 
 ROOT_URLCONF = 'middleware.urls'
 
