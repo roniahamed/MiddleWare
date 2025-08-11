@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <style>
+        body {
+            background: #f4f6f8;
+            font-family: Arial, sans-serif;
+        }
+        .registration-container {
+            background: #fff;
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 32px 28px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #333;
+        }
+        form label {
+            display: block;
+            margin-bottom: 6px;
+            color: #444;
+            font-weight: 500;
+        }
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"] {
+            width: 100%;
+            padding: 10px 8px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        form input[type="submit"] {
+            width: 100%;
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        form input[type="submit"]:hover {
+            background: #1565c0;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 18px;
+        }
+        .login-link a {
+            color: #1976d2;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h2>Register</h2>
+        <form method="post">
+            
+            {% csrf_token %}
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" required>
+
+            <label for="user_type">User Type</label>
+            <select id="user_type" name="user_type" required>
+                <option value="" disabled selected>Select user type</option>
+                <option value="STUDENT">Student</option>
+                <option value="TEACHER">Teacher</option>
+                <option value="PRINCIPAL">Principal</option>
+            </select>
+            <label for="password1">Password</label>
+            <input type="password" id="password1" name="password1" required>
+
+            <label for="password2">Confirm Password</label>
+            <input type="password" id="password2" name="password2" required>
+
+            <input type="submit" value="Register">
+        </form>
+        <div class="login-link">
+            Already have an account? <a href="{% url 'login' %}">Login</a>
+        </div>
+    </div>
+</body>
+</html>
