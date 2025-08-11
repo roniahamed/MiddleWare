@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, login_not_required
 
 def teacher_dashboard(request):
     return HttpResponse(f"<h1> Welcome to the Teacher's Dashboard, {request.user.username} !</h1> ")
@@ -13,6 +14,7 @@ def student_dashboard(request):
 def principal_dashboard(request):
     return HttpResponse(f"<h1> Welcome to the Principal's Dashboard, {request.user.username} !</h1> ")
 
+@login_not_required
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -25,7 +27,7 @@ def login_view(request):
             messages.error(request, 'Invalid username or password')
     return render(request, 'login.html')
 
-
+@login_not_required
 def register_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -40,6 +42,7 @@ def register_view(request):
             return redirect('/')  # Change as needed
     return render(request, 'registration.html')
 
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('login')
